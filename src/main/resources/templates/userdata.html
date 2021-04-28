@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>User Data</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <ul class="nav navbar-nav ">
+        <li><a th:href="@{/}"><h4>Profile</h4></a></li>
+        <li><a th:href="@{/userdata}"><h4>UserInfo</h4></a></li>
+
+    </ul>
+</div>
+<div class="container-fluid">
+    <div class="container " >
+    <form  th:action="@{/findUser}" th:method="get" style="float: right; padding-bottom: 10px;">
+        <input type="text" name="name" id="name" required >
+        <button type="submit">Search</button>
+    </form>
+    </div>
+
+  <div class="site-blocks-table col-md-12">
+    <table class="table table-bordered" >
+    <thead >
+    <tr >
+      <th class="product-name">Name</th>
+      <th class="product-price">Age</th>
+      <th class="product-price">Email</th>
+      <th class="product-quantity">Address</th>
+      <th class="product-quantity">Phone</th>
+      <th class="product-edit">Edit</th>
+      <th class="product-remove">Delete</th>
+    </tr>
+    </thead>
+
+
+    <tbody>
+    <tr th:each="users :${users}">
+
+
+        <!--product-name -->
+        <td class="product-name">
+            <h2 class="h5 text-black" th:text="${users.name}"></h2>
+          </a>
+        </td>
+
+
+        <!--age-->
+        <td class="product-name">
+            <h2 class="h5 text-black" th:text="${users.age}"></h2>
+
+          </a>
+        </td>
+
+        <!-- Email -->
+        <td>
+            <h2 class="h5 text-black" th:text="${users.email}"></h2>
+        </td>
+
+        <!--address-->
+        <td>
+            <h2 class="h5 text-black" th:text="${users.address}"></h2>
+
+        </td>
+
+        <!--PhoneNumber-->
+        <td>
+
+          <h2 class="h5 text-black" th:text="${users.phoneNumber}"></h2>
+        </td>
+
+
+        <!-- Edit -->
+        <td>
+            <a th:href="@{/edituser(userId=${users.id})}">Edit</a>
+        </td>
+
+        <!-- Remove -->
+        <td>
+          <form th:action="@{/deleteuser(userId=${users.id})}" th:method="delete">
+          <button type="submit" value="DELETE" >Delete</button>
+          </form>
+        </td>
+
+
+    </tr>
+    </tbody>
+
+  </table>
+  </div>
+</body>
+</html>
